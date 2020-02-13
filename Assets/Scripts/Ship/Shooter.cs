@@ -41,7 +41,8 @@ public class Shooter : MonoBehaviour
         if (!_canShoot) return;
         
         var nextBullet = _objectPooler.GetNextObject();
-        
+
+        nextBullet.gameObject.layer = gameObject.layer;
         var bulletTransform = nextBullet.transform;
         var myTransform = transform;
         var bulletPosition = myTransform.position;
