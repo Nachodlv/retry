@@ -8,14 +8,16 @@
 public class DamageReceiver : MonoBehaviour
 {
     private Stats _stats;
+    private Pooleable _pooleable;
 
     /// <summary>
-    /// <para>Adds a listener to the OnDie event. When the health reaches zero the gameObject is deactivated</para>
+    /// <para>Adds a listener to the OnDie event</para>
     /// </summary>
     private void Awake()
     {
         _stats = GetComponent<Stats>();
-        _stats.OnDie += () => { gameObject.SetActive(false); };
+        _pooleable = GetComponent<Pooleable>();
+        _stats.OnDie += OnDie;
     }
 
     /// <summary>
@@ -29,6 +31,22 @@ public class DamageReceiver : MonoBehaviour
         if (colliderStats != null)
         {
             _stats.Health -= colliderStats.Damage;
+        }
+    }
+
+    /// <summary>
+    /// <para>If this GameObject has a pooler then calls the method Deactivated form it.
+    /// If this GameObject does not have a pooler then it deactivated the GameObject</para>
+    /// </summary>
+    private void OnDie()
+    {
+        if (_pooleable != null)
+        {
+            _pooleable.Deactivate();
+        }
+        else
+        {
+            gameObject.SetActive(false);
         }
     }
 }

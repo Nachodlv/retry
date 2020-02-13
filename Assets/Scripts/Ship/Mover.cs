@@ -30,10 +30,10 @@ public class Mover : MonoBehaviour
     }
     
     /// <summary>
-    /// <para>Adds force to the RigidBody2D in the direction specified by _moveDirection</para>
+    /// <para>Sets the velocity to the RigidBody2D in the direction specified by _moveDirection</para>
     /// </summary>
     private void Update()
     {
-        _rigidbody2D.AddForce(_moveDirection * _stats.Speed);
+        _rigidbody2D.velocity = _moveDirection * _stats.Speed;
     }
 }
