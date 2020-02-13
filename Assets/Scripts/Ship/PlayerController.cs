@@ -6,10 +6,9 @@ using UnityEngine;
 /// <summary>
 /// <para>Fire events whenever the touch controller is moved</para>
 /// </summary>
-public class ShipController : Controller
+public class PlayerController : Controller
 {
     public override event Action OnFireAbility;
-    public override event Action<Vector2> OnMove;
 
     [SerializeField] [Tooltip("Touch controller to move the player ship")]
     private SimpleTouchController touchController;
@@ -24,15 +23,6 @@ public class ShipController : Controller
     public override void FireAbility()
     {
         throw new System.NotImplementedException();
-    }
-
-    /// <summary>
-    /// Invokes the OnMove event
-    /// </summary>
-    /// <param name="direction"></param>
-    public override void Move(Vector2 direction)
-    {
-        OnMove?.Invoke(direction);
     }
 
     /// <summary>
