@@ -353,8 +353,8 @@ EdgeCollider2D:
   m_Points:
   - {x: -13.715729, y: 2.3865967}
   - {x: -13.71906, y: -7.6188993}
-  - {x: 6.9825487, y: -7.620696}
-  - {x: 6.949317, y: 2.3733597}
+  - {x: 8.561017, y: -7.6516466}
+  - {x: 8.403984, y: 2.4043097}
   - {x: -13.651944, y: 2.3621817}
 --- !u!4 &314664936
 Transform:
@@ -470,6 +470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 369245996}
+  constantVelocity: 0
 --- !u!114 &369245996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -495,7 +496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c7e8b2d9785019c08c383277d0afa72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 18
   damage: 5
   health: 5
 --- !u!50 &369245998
@@ -557,6 +558,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee26ce7142dba6b2fa3f460d78dce599, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bounceForce: 1
+  invincibleTime: 100
 --- !u!114 &369246001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -571,7 +574,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 369245996}
   bullet: {fileID: 5072287395628740904, guid: e1a42ddcae4decae6bd684a4ebccb84d, type: 3}
-  cadence: 1
+  cadence: 0.5
   nonStop: 1
 --- !u!1 &404627742
 GameObject:
@@ -866,17 +869,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e8125b1681ed522a84f12724910f24b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tickDuration: 5
+  tickDuration: 10
   _dificultyLevel: 1
   _enemies:
   - _enemy: {fileID: 7979695148811066335, guid: 24f93034992eaea3c80032d6d36b1ed4,
       type: 3}
     _points: 10
-    _spawnProbability: 0.5
+    _spawnProbability: 0.8
   - _enemy: {fileID: 1820598780686927841, guid: 3c22817ec34574b13aaa8ead2c77473e,
       type: 3}
     _points: 10
-    _spawnProbability: 0.5
+    _spawnProbability: 0.2
   limitY: {x: -4, y: 4.03}
   limitX: 12.12
 --- !u!4 &1188463699

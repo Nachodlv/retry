@@ -26,12 +26,20 @@ class EnemySpawn
 
     public float Points => _points;
 
+    /// <summary>
+    /// <para>Creates a pool of enemies for the EnemySpawn</para>
+    /// </summary>
+    /// <param name="newEnemies">Action that will be executed when the pool of enemies grows</param>
     public void InitializePool(Action<List<Pooleable>> newEnemies)
     {
         _objectPooler = new ObjectPooler();
-        _objectPooler.InstantiateObjects(10, _enemy, _enemy.name, newEnemies);
+        _objectPooler.InstantiateObjects(3, _enemy, _enemy.name, newEnemies);
     }
 
+    /// <summary>
+    /// <para>Returns the next enemy from the pool</para>
+    /// </summary>
+    /// <returns></returns>
     public Pooleable GetNextEnemy()
     {
         return _objectPooler.GetNextObject();
