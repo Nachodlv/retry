@@ -100,9 +100,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c7e8b2d9785019c08c383277d0afa72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 5
   damage: 1
-  health: 1
+  health: 10
 --- !u!50 &5212998652918081632
 Rigidbody2D:
   serializedVersion: 4
@@ -137,6 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 5212998652918081634}
+  constantVelocity: 0
 --- !u!114 &5212998652918081634
 MonoBehaviour:
   m_ObjectHideFlags: 0

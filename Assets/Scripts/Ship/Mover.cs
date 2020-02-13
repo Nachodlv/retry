@@ -9,6 +9,9 @@ public class Mover : MonoBehaviour
     [SerializeField] [Tooltip("Controller that will tell the mover when to move")]
     private Controller controller;
 
+    [SerializeField][Tooltip("If constant velocity is true then the script will set the velocity to the RigidBody")]
+    private bool constantVelocity;
+    
     private Stats _stats;
     private Vector2 _moveDirection;
     private Rigidbody2D _rigidbody2D;
@@ -30,10 +33,11 @@ public class Mover : MonoBehaviour
     }
     
     /// <summary>
-    /// <para>Sets the velocity to the RigidBody2D in the direction specified by _moveDirection</para>
+    /// <para>Adds force to the RigidBody2D in the direction specified by _moveDirection</para>
     /// </summary>
     private void Update()
     {
-        _rigidbody2D.velocity = _moveDirection * _stats.Speed;
+        if(!constantVelocity) _rigidbody2D.AddForce(_moveDirection * _stats.Speed);
+        else _rigidbody2D.velocity = _moveDirection * _stats.Speed;
     }
 }

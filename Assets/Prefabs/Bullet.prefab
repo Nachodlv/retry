@@ -136,6 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 3660461209234161892}
+  constantVelocity: 1
 --- !u!114 &3660461209234161891
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -24,6 +24,8 @@ class EnemySpawn
     public float SpawnProbability => _spawnProbability;
     public Pooleable Enemy => _enemy;
 
+    public float Points => _points;
+
     public void InitializePool(Action<List<Pooleable>> newEnemies)
     {
         _objectPooler = new ObjectPooler();
@@ -41,6 +43,8 @@ class EnemySpawn
 /// </summary>
 public class EnemySpawner : MonoBehaviour
 {
+    public event Action<float> OnPointsScored;
+
     [SerializeField] [Tooltip("Time between each enemy spawn")]
     private float tickDuration;
 
@@ -65,13 +69,16 @@ public class EnemySpawner : MonoBehaviour
     {
         foreach (var enemySpawn in _enemies)
         {
-            enemySpawn.InitializePool(NewEnemies);
+            enemySpawn.InitializePool((enemies) => NewEnemies(enemies, enemySpawn.Points));
         }
     }
 
-    private void NewEnemies(List<Pooleable> enemies)
+    private void NewEnemies(List<Pooleable> enemies, float score)
     {
-        //TODO add score
+        foreach (var enemy in enemies)
+        {
+            enemy.GetComponent<Stats>().OnDie += () => OnPointsScored?.Invoke(score);
+        }
     }
 
     /// <summary>
