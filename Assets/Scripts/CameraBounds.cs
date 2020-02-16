@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class CameraBounds
 {
+    /// <summary>
+    /// <para>Returns the bounds of the camera view</para>
+    /// </summary>
+    /// <param name="camera"></param>
+    /// <returns></returns>
     public static Bounds GetCameraBounds(Camera camera)
     {
         var screenAspect = Screen.width / Screen.height;
@@ -13,19 +18,4 @@ public class CameraBounds
             new Vector3(cameraHeight * screenAspect, cameraHeight, 0));
         return bounds;
     }
-
-//    public static Vector2[] GetCameraBoundPoints(Camera camera)
-//    {
-//        var bounds = GetCameraBounds(camera);
-//        var max = bounds.max;
-//        var min = bounds.min;
-//        
-//        return new[]
-//        {
-//            new Vector2(max.x, max.y),
-//            new Vector2(min.x, max.y),
-//            new Vector2(min.x, min.y),
-//            new Vector2(max.x, min.y), 
-//        };
-//    }
 }

@@ -84,6 +84,14 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
+        SetUpLimits();
+    }
+
+    /// <summary>
+    /// <para>Set up the positions for the enemy spawning taking into account the camera bounds.</para>
+    /// </summary>
+    private void SetUpLimits()
+    {
         var camera = Camera.main;
         if (camera == null) return;
         var bounds = CameraBounds.GetCameraBounds(camera);
