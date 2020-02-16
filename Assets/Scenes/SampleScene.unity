@@ -600,7 +600,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 369245996}
-  bullet: {fileID: 5072287395628740904, guid: e1a42ddcae4decae6bd684a4ebccb84d, type: 3}
+  bullet: {fileID: -7654395422781112653, guid: e1a42ddcae4decae6bd684a4ebccb84d, type: 3}
   cadence: 0.5
   nonStop: 1
 --- !u!1 &404627742
@@ -905,11 +905,11 @@ MonoBehaviour:
   tickDuration: 5
   _dificultyLevel: 1
   _enemies:
-  - _enemy: {fileID: 7979695148811066335, guid: 24f93034992eaea3c80032d6d36b1ed4,
+  - _enemy: {fileID: 6017480202447470230, guid: 24f93034992eaea3c80032d6d36b1ed4,
       type: 3}
     _points: 10
     _spawnProbability: 0.8
-  - _enemy: {fileID: 1820598780686927841, guid: 3c22817ec34574b13aaa8ead2c77473e,
+  - _enemy: {fileID: 2628942029782229672, guid: 3c22817ec34574b13aaa8ead2c77473e,
       type: 3}
     _points: 10
     _spawnProbability: 0.2

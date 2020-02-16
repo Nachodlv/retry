@@ -16,8 +16,15 @@ public class Stats : MonoBehaviour
     [SerializeField] [Tooltip("Damage that can receive before destruction")]
     private float health;
 
+    private float maxHealth;
+    
     public float Speed => speed;
     public float Damage => damage;
+
+    private void Awake()
+    {
+        maxHealth = health;
+    }
 
     /// <summary>
     /// <para>If the health reaches zero then the OnDie event is invoked</para>
@@ -30,5 +37,13 @@ public class Stats : MonoBehaviour
             if(value <= 0) OnDie?.Invoke();
             health = value;
         }
+    }
+
+    /// <summary>
+    /// <para>Sets the health equal to the max health</para>
+    /// </summary>
+    public void ResetStats()
+    {
+        health = maxHealth;
     }
 }
