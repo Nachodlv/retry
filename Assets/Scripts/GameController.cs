@@ -6,40 +6,59 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     [SerializeField] [Tooltip("Displayer of the score")]
-    private ScoreUI scoreUi;
-
+    private ShowNumberUI scoreUI;
+    
     [SerializeField] [Tooltip("Spawner of enemies")]
     private EnemySpawner enemySpawner;
 
-    [SerializeField][Tooltip("Quantity of lives the player has")]
-    private int lives = 2;
-
-    [SerializeField][Tooltip("Player prefab")]
-    private PlayerController player;
-    [SerializeField] [Tooltip("Touch controller to move the player ship")]
-    private SimpleTouchController touchController;
+    [SerializeField] [Tooltip("Spawner of player ships")]
+    private PlayerSpawner playerSpawner;
 
     private float score;
-    private PlayerSpawner playerSpawner;
 
     private void Awake()
     {
-        scoreUi.UpdateScore(score);
+        scoreUI.UpdateValue(score);
         enemySpawner.OnPointsScored += PointsScored;
-        
-        playerSpawner = new PlayerSpawner(lives, player, touchController);
-        playerSpawner.InstantiatePlayerShips();
+
         playerSpawner.OnAllShipsDestroyed += GameOver;
+        playerSpawner.OnShipDestroyed += ShipDestroyed;
     }
 
+    /// <summary>
+    /// <para>Sums the points with the score</para>
+    /// </summary>
+    /// <param name="points"></param>
     private void PointsScored(float points)
     {
-        score += points;
-        scoreUi.UpdateScore(score);
+        UpdateScore(score + points);
     }
 
+    /// <summary>
+    /// <para>Ends the game</para>
+    /// <remarks>This method is executed when the lives of the player reaches zero</remarks>
+    /// </summary>
     private void GameOver()
     {
         Debug.Log("GG");
+    }
+
+    /// <summary>
+    /// <para>Sets the score to zero</para>
+    /// <remarks>This method is executed when the player loses one live</remarks>
+    /// </summary>
+    private void ShipDestroyed()
+    {
+        UpdateScore(0);
+    }
+
+    /// <summary>
+    /// <para>Sets the score to newScore and updates the UI</para>
+    /// </summary>
+    /// <param name="newScore"></param>
+    private void UpdateScore(float newScore)
+    {
+        score = newScore;
+        scoreUI.UpdateValue(score);
     }
 }
