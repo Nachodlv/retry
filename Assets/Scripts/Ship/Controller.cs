@@ -1,14 +1,15 @@
 ﻿using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Controllable))]
 public abstract class Controller : MonoBehaviour
 {
-    public abstract event Action OnFireAbility;
+    private Controllable controllable;
 
-    public event Action<Vector2> OnMove;
-    public event Action OnShoot;
-
-    public abstract void FireAbility();
+    protected void Awake()
+    {
+        controllable = GetComponent<Controllable>();
+    }
 
     /// <summary>
     /// Invokes the OnMove event
@@ -16,7 +17,7 @@ public abstract class Controller : MonoBehaviour
     /// <param name="direction"></param>
     public void Move(Vector2 direction)
     {
-        OnMove?.Invoke(direction);
+        controllable.Move(direction);
     }
 
     /// <summary>
@@ -24,6 +25,6 @@ public abstract class Controller : MonoBehaviour
     /// </summary>
     public void Shoot()
     {
-        OnShoot?.Invoke();
+        controllable.Shoot();
     }
 }

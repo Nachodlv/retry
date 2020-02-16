@@ -5,12 +5,6 @@
 /// </summary>
 public class BulletController : Controller
 {
-    public override event Action OnFireAbility;
-    public override void FireAbility()
-    {
-        throw new NotImplementedException();
-    }
-
     /// <summary>
     /// <para>Continuously moves forward.</para>
     /// </summary>

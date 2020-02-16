@@ -3,10 +3,11 @@
 /// <summary>
 /// <para>Shoots bullets when the controller event is called</para>
 /// </summary>
+[RequireComponent(typeof(Controllable))]
 public class Shooter : MonoBehaviour
 {
     [SerializeField] [Tooltip("Controller that will tell the shooter when to shoot")]
-    private Controller controller;
+    private Controllable controllable;
 
     [SerializeField] [Tooltip("Bullet that will be shoot")]
     private Pooleable bullet;
@@ -29,7 +30,8 @@ public class Shooter : MonoBehaviour
     {
         _objectPooler = new ObjectPooler();
         _objectPooler.InstantiateObjects(10, bullet, "Bullets");
-        controller.OnShoot += Shoot;
+        controllable = GetComponent<Controllable>();
+        controllable.OnShoot += Shoot;
     }
 
     /// <summary>

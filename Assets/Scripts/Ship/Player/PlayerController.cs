@@ -8,21 +8,17 @@ using UnityEngine;
 /// </summary>
 public class PlayerController : Controller
 {
-    public override event Action OnFireAbility;
-
-    [SerializeField] [Tooltip("Touch controller to move the player ship")]
     private SimpleTouchController touchController;
 
     private void Awake()
     {
-        touchController.TouchEvent += Move;
-        touchController.TouchStateEvent += TouchControllerState;
+        base.Awake();
     }
 
-    
-    public override void FireAbility()
+    private void Start()
     {
-        throw new System.NotImplementedException();
+        touchController.TouchEvent += Move;
+        touchController.TouchStateEvent += TouchControllerState;
     }
 
     /// <summary>
@@ -32,5 +28,10 @@ public class PlayerController : Controller
     private void TouchControllerState(bool present)
     {
         if(!present) Move(Vector2.zero);
+    }
+
+    public void SetTouchController(SimpleTouchController newTouchController)
+    {
+        touchController = newTouchController;
     }
 }

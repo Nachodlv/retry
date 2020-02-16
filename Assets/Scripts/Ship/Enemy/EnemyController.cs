@@ -6,13 +6,6 @@ using UnityEngine;
 /// </summary>
 public class EnemyController : Controller
 {
-    public override event Action OnFireAbility;
-
-    public override void FireAbility()
-    {
-        throw new NotImplementedException();
-    }
-
     /// <summary>
     /// Continuously moves forward.
     /// </summary>

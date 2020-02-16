@@ -1,26 +1,30 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 /// <summary>
 /// <para>Moves the RigidBody in the direction specified by the Controller</para>
 /// </summary>
-[RequireComponent(typeof(Stats), typeof(Rigidbody2D))]
+[RequireComponent(typeof(Stats), typeof(Rigidbody2D), typeof(Controllable))]
 public class Mover : MonoBehaviour
 {
-    [SerializeField] [Tooltip("Controller that will tell the mover when to move")]
-    private Controller controller;
-
-    [SerializeField][Tooltip("If constant velocity is true then the script will set the velocity to the RigidBody")]
+    [SerializeField] [Tooltip("If constant velocity is true then the script will set the velocity to the RigidBody")]
     private bool constantVelocity;
-    
+
     private Stats _stats;
     private Vector2 _moveDirection;
     private Rigidbody2D _rigidbody2D;
+    private Controllable controllable;
 
     private void Awake()
     {
         _stats = GetComponent<Stats>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        controller.OnMove += Move;
+        controllable = GetComponent<Controllable>();
+        controllable.OnMove += Move;
+    }
+
+    private void OnEnable()
+    {
     }
 
     /// <summary>
@@ -31,13 +35,13 @@ public class Mover : MonoBehaviour
     {
         _moveDirection = direction;
     }
-    
+
     /// <summary>
     /// <para>Adds force to the RigidBody2D in the direction specified by _moveDirection</para>
     /// </summary>
     private void Update()
     {
-        if(!constantVelocity) _rigidbody2D.AddForce(_moveDirection * _stats.Speed);
+        if (!constantVelocity) _rigidbody2D.AddForce(_moveDirection * _stats.Speed);
         else _rigidbody2D.velocity = _moveDirection * _stats.Speed;
     }
 }
