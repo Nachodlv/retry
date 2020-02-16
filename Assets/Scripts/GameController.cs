@@ -6,22 +6,22 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     [SerializeField] [Tooltip("Displayer of the score")]
-    private ScoreUI _scoreUi;
+    private ScoreUI scoreUi;
 
     [SerializeField] [Tooltip("Spawner of enemies")]
-    private EnemySpawner _enemySpawner;
+    private EnemySpawner enemySpawner;
 
     private float score;
 
     private void Awake()
     {
-        _scoreUi.UpdateScore(score);
-        _enemySpawner.OnPointsScored += PointsScored;
+        scoreUi.UpdateScore(score);
+        enemySpawner.OnPointsScored += PointsScored;
     }
 
     private void PointsScored(float points)
     {
         score += points;
-        _scoreUi.UpdateScore(score);
+        scoreUi.UpdateScore(score);
     }
 }

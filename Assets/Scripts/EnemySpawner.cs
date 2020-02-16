@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SocialPlatforms;
 using Random = UnityEngine.Random;
 
 [Serializable]
@@ -62,12 +63,12 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] [Tooltip("Enemies to be spawned")]
     private EnemySpawn[] _enemies;
 
-    [Header("Spawn range")] [SerializeField] [Tooltip("Limits in the Y Axis")]
-    private Vector2 limitY;
-
-    [SerializeField] [Tooltip("Limit in the X Axis")]
+    [SerializeField] [Tooltip("Offset in the X axis that the enemies will be spawned")]
+    private float xOffset;
+    
+    private float minY;
+    private float maxY;
     private float limitX;
-
     private float currentTick;
 
     /// <summary>
@@ -81,6 +82,18 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        var camera = Camera.main;
+        if (camera == null) return;
+        var bounds = CameraBounds.GetCameraBounds(camera);
+        var max = bounds.max;
+        var min = bounds.min;
+        limitX = max.x + xOffset;
+        minY = min.y;
+        maxY = max.y;
+    }
+    
     private void NewEnemies(List<Pooleable> enemies, float score)
     {
         foreach (var enemy in enemies)
@@ -102,7 +115,7 @@ public class EnemySpawner : MonoBehaviour
 
         currentTick = 0;
         var randomNumber = Random.Range(0f, 1f);
-        var randomHeight = Random.Range(limitY.x, limitY.y);
+        var randomHeight = Random.Range(minY, maxY);
         var enemy = GetRandomEnemy(randomNumber).GetNextEnemy();
         enemy.transform.position = new Vector2(limitX, randomHeight);
     }
