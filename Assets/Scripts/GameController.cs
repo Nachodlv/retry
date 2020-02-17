@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class GameController : MonoBehaviour
+public class GameController : CheckPointerController
 {
     [SerializeField] [Tooltip("Displayer of the score")]
     private ShowNumberUI scoreUI;
@@ -35,11 +33,12 @@ public class GameController : MonoBehaviour
     }
 
     /// <summary>
-    /// <para>Ends the game</para>
+    /// <para>Resets the Scene</para>
     /// <remarks>This method is executed when the lives of the player reaches zero</remarks>
     /// </summary>
     private void GameOver()
     {
+        SceneManager.LoadScene(0);
         Debug.Log("GG");
     }
 

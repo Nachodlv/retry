@@ -1,29 +1,40 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// <para>Uses a Controllable to control a GameObject</para>
+/// </summary>
 [RequireComponent(typeof(Controllable))]
 public abstract class Controller : MonoBehaviour
 {
-    private Controllable controllable;
+    protected Controllable controllable;
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         controllable = GetComponent<Controllable>();
     }
 
     /// <summary>
-    /// Invokes the OnMove event
+    /// <para>Calls the Move method from the controllable</para>
     /// </summary>
     /// <param name="direction"></param>
-    public void Move(Vector2 direction)
+    protected void Move(Vector2 direction)
     {
         controllable.Move(direction);
     }
 
     /// <summary>
-    /// <para>Invokes the OnShoot event.</para>
+    /// <para>Calls the MoveToPosition method from the controllable</para>
     /// </summary>
-    public void Shoot()
+    /// <param name="position"></param>
+    protected void MoveToPosition(Vector2 position)
+    {
+        controllable.MoveToPosition(position);
+    }
+
+    /// <summary>
+    /// <para>Calls the Shoot method from the controllable</para>
+    /// </summary>
+    protected void Shoot()
     {
         controllable.Shoot();
     }

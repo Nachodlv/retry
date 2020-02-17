@@ -150,7 +150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f96b9f4bb5da58bb1a6ede82da7a9e20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllable: {fileID: 0}
 --- !u!61 &5212998652918081636
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -190,7 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceForce: 5
-  invincibleTime: 2
+  invincibleTime: 0.5
 --- !u!114 &850469503853150210
 MonoBehaviour:
   m_ObjectHideFlags: 0

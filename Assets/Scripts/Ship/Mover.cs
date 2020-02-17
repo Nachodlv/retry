@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// <para>Moves the RigidBody in the direction specified by the Controller</para>
@@ -12,6 +11,8 @@ public class Mover : MonoBehaviour
 
     private Stats _stats;
     private Vector2 _moveDirection;
+    private Vector2 _moveToPosition;
+    private bool _isMovingByPosition;
     private Rigidbody2D _rigidbody2D;
     private Controllable controllable;
 
@@ -21,10 +22,7 @@ public class Mover : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         controllable = GetComponent<Controllable>();
         controllable.OnMove += Move;
-    }
-
-    private void OnEnable()
-    {
+        controllable.OnMovePosition += MoveToPosition;
     }
 
     /// <summary>
@@ -33,15 +31,42 @@ public class Mover : MonoBehaviour
     /// <param name="direction"></param>
     private void Move(Vector2 direction)
     {
+        _isMovingByPosition = false;
         _moveDirection = direction;
     }
 
     /// <summary>
-    /// <para>Adds force to the RigidBody2D in the direction specified by _moveDirection</para>
+    /// <para>Sets the _moveToPosition to the position passed in the parameters</para>
+    /// </summary>
+    /// <param name="position"></param>
+    private void MoveToPosition(Vector2 position)
+    {
+        _isMovingByPosition = true;
+        _moveToPosition = position;
+    }
+
+    /// <summary>
+    /// <para>If constantVelocity is false, adds force to the RigidBody2D in the direction specified by _moveDirection</para>
+    /// <para>If constantVelocity is true, sets the velocity equals to the _moveDirection</para>
+    /// <para>If _isMovingByPosition is true, moves the position towards the _movePosition</para>
     /// </summary>
     private void Update()
     {
-        if (!constantVelocity) _rigidbody2D.AddForce(_moveDirection * _stats.Speed);
-        else _rigidbody2D.velocity = _moveDirection * _stats.Speed;
+        if (constantVelocity)
+        {
+            _rigidbody2D.velocity = _moveDirection * _stats.Speed;
+            return;
+        }
+
+        if (_isMovingByPosition)
+        {
+            Vector2 position = transform.position;
+            transform.position =
+                Vector2.Lerp(position, _moveToPosition,
+                    Time.deltaTime * _stats.Speed / 10); // TODO move this to a variable
+            return;
+        }
+
+        _rigidbody2D.AddForce(_moveDirection * _stats.Speed);
     }
 }

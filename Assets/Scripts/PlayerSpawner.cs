@@ -1,8 +1,32 @@
 ﻿using System;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
-public class PlayerSpawner : MonoBehaviour
+/// <summary>
+/// <para>Stores the PlayerRecorder, PlayerController and Rigidbody2D of a Player ship</para>
+/// </summary>
+struct PlayerShip
+{
+    private PlayerRecorder playerRecorder;
+    private PlayerController playerController;
+    private Rigidbody2D rigidbody2D;
+
+    public PlayerRecorder PlayerRecorder => playerRecorder;
+    public PlayerController PlayerController => playerController;
+    public Rigidbody2D Rigidbody2D => rigidbody2D;
+
+    public PlayerShip(PlayerRecorder playerRecorder, PlayerController playerController, Rigidbody2D rigidbody2D)
+    {
+        this.playerRecorder = playerRecorder;
+        this.playerController = playerController;
+        this.rigidbody2D = rigidbody2D;
+    }
+}
+
+/// <summary>
+/// <para>Spawns the player ships. One ship is always controlled by the PlayerController and the ones destroyed will
+/// be controlled by the PlayerRecorder</para>
+/// </summary>
+public class PlayerSpawner : CheckPointerController
 {
     public event Action OnAllShipsDestroyed;
     public event Action OnShipDestroyed;
@@ -18,10 +42,13 @@ public class PlayerSpawner : MonoBehaviour
 
     [SerializeField] [Tooltip("Display of lives")]
     private ShowNumberUI livesUI;
-    
-    private PlayerController[] ships;
+
+    [SerializeField] [Tooltip("Initial position of the ship")]
+    private Vector2 initialPosition;
+
+    private PlayerShip[] ships;
     private int currentLife;
-    private PlayerController currentShip;
+    private PlayerShip currentShip;
 
     private void Awake()
     {
@@ -38,14 +65,18 @@ public class PlayerSpawner : MonoBehaviour
     {
         if (lives <= 0) return;
 
-        ships = new PlayerController[lives];
+        ships = new PlayerShip[lives];
         for (int i = 0; i < ships.Length; i++)
         {
-            var ship = Instantiate(player).GetComponent<PlayerController>();
-            ship.enabled = false;
-            ship.SetTouchController(touchController);
-            ship.gameObject.SetActive(false);
-            ship.gameObject.GetComponent<Stats>().OnDie += () => OnShipDie(ship);
+            var playerController = Instantiate(player);
+            var playerRecorder = playerController.GetComponent<PlayerRecorder>();
+
+            var ship = new PlayerShip(playerRecorder, playerController, playerController.GetComponent<Rigidbody2D>());
+
+            playerController.Enable = false;
+            playerController.SetTouchController(touchController);
+            playerController.gameObject.SetActive(false);
+            playerController.gameObject.GetComponent<Stats>().OnDie += () => OnShipDie(ship);
             ships[i] = ship;
         }
 
@@ -57,14 +88,18 @@ public class PlayerSpawner : MonoBehaviour
     /// </summary>
     private void InitializeShip()
     {
-        if (currentShip != null)
+        if (currentShip.PlayerController != null)
         {
-            currentShip.enabled = false;
+            currentShip.PlayerController.Enable = false;
+            currentShip.PlayerRecorder.StopRecording();
         }
 
-        currentShip= ships[currentLife];
-        currentShip.gameObject.SetActive(true);
-        currentShip.enabled = true;
+        currentShip = ships[currentLife];
+        currentShip.Rigidbody2D.velocity = Vector2.zero;
+        currentShip.PlayerRecorder.StartRecording();
+        currentShip.PlayerRecorder.gameObject.SetActive(true);
+        currentShip.PlayerController.Enable = true;
+        ReplayPreviousShips();
     }
 
     /// <summary>
@@ -73,10 +108,10 @@ public class PlayerSpawner : MonoBehaviour
     /// <remarks>This method is executed when a player ship is destroyed</remarks>
     /// </summary>
     /// <param name="ship"></param>
-    private void OnShipDie(PlayerController ship)
+    private void OnShipDie(PlayerShip ship)
     {
-        if (ship != ships[currentLife]) return;
-        
+        if (ship.PlayerController != ships[currentLife].PlayerController) return;
+
         currentLife++;
         livesUI.UpdateValue(lives - currentLife);
         if (currentLife >= lives) OnAllShipsDestroyed?.Invoke();
@@ -84,6 +119,21 @@ public class PlayerSpawner : MonoBehaviour
         {
             OnShipDestroyed?.Invoke();
             InitializeShip();
+        }
+    }
+
+    /// <summary>
+    /// <para>Reproduces the recording of the ships previously destroyed</para>
+    /// </summary>
+    private void ReplayPreviousShips()
+    {
+        for (var i = 0; i < currentLife; i++)
+        {
+            var playerRecorder = ships[i].PlayerRecorder;
+            var shipGameObject = playerRecorder.gameObject;
+            shipGameObject.SetActive(true);
+            shipGameObject.transform.position = initialPosition;
+            playerRecorder.ReproduceRecord();
         }
     }
 }
