@@ -99,6 +99,7 @@ public class PlayerSpawner : CheckPointerController
         currentShip.PlayerRecorder.StartRecording();
         currentShip.PlayerRecorder.gameObject.SetActive(true);
         currentShip.PlayerController.Enable = true;
+        currentShip.PlayerController.transform.position = initialPosition;
         ReplayPreviousShips();
     }
 
@@ -117,8 +118,8 @@ public class PlayerSpawner : CheckPointerController
         if (currentLife >= lives) OnAllShipsDestroyed?.Invoke();
         else
         {
-            OnShipDestroyed?.Invoke();
             InitializeShip();
+            OnShipDestroyed?.Invoke();
         }
     }
 

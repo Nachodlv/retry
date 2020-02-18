@@ -30,5 +30,6 @@ public enum RecordType
 {
     Move,
     Shoot,
+    Die,
     Ability
 }

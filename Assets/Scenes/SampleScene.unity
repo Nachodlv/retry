@@ -812,15 +812,14 @@ MonoBehaviour:
   tickDuration: 2
   _dificultyLevel: 1
   _enemies:
-  - _enemy: {fileID: 6017480202447470230, guid: 24f93034992eaea3c80032d6d36b1ed4,
-      type: 3}
-    _points: 10
-    _spawnProbability: 0.8
-  - _enemy: {fileID: 2628942029782229672, guid: 3c22817ec34574b13aaa8ead2c77473e,
-      type: 3}
-    _points: 10
-    _spawnProbability: 0.2
+  - enemy: {fileID: 6017480202447470230, guid: 24f93034992eaea3c80032d6d36b1ed4, type: 3}
+    points: 10
+    spawnProbability: 0.75
+  - enemy: {fileID: 2628942029782229672, guid: 3c22817ec34574b13aaa8ead2c77473e, type: 3}
+    points: 20
+    spawnProbability: 0.25
   xOffset: 1
+  checkPointerController: {fileID: 1404080529}
 --- !u!4 &1188463699
 Transform:
   m_ObjectHideFlags: 0
@@ -1310,6 +1309,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1349511017}
   m_CullTransparentMesh: 0
+--- !u!114 &1404080529 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5028532737806239094, guid: b0eac32194423d84190a6de348631314,
+    type: 3}
+  m_PrefabInstance: {fileID: 5028532736730734936}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43e3edbeb5252ba0486db3aa16b7c6f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1871871455
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1557,7 +1568,7 @@ MonoBehaviour:
   player: {fileID: 2752361851093200433, guid: b531015e8df6a0c498cd59c3f7706d76, type: 3}
   lives: 10
   livesUI: {fileID: 1988914825}
-  initialPosition: {x: 0, y: 0}
+  initialPosition: {x: -11, y: 0}
 --- !u!4 &1921557434
 Transform:
   m_ObjectHideFlags: 0

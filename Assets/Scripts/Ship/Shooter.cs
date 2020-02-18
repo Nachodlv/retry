@@ -45,7 +45,7 @@ public class Shooter : MonoBehaviour
         var nextBullet = _objectPooler.GetNextObject();
 
         nextBullet.gameObject.layer = gameObject.layer;
-        var bulletTransform = nextBullet.transform;
+        var bulletTransform = nextBullet.transform; // TODO generating GC
         var myTransform = transform;
         var bulletPosition = myTransform.position;
         

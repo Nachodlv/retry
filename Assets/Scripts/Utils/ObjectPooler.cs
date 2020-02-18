@@ -44,7 +44,7 @@ public class ObjectPooler
     /// <returns></returns>
     public Pooleable GetNextObject()
     {
-        if (!objects.Any()) Grow();
+        if (objects.Count == 0) Grow();
 
         var first = objects.First();
         objects.RemoveAt(0);

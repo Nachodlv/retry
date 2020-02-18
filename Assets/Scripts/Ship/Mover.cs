@@ -63,7 +63,7 @@ public class Mover : MonoBehaviour
             Vector2 position = transform.position;
             transform.position =
                 Vector2.Lerp(position, _moveToPosition,
-                    Time.deltaTime * _stats.Speed / 10); // TODO move this to a variable
+                    Time.deltaTime * _stats.Speed ); // TODO move this to a variable
             return;
         }
 

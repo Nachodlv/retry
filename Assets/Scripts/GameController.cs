@@ -44,11 +44,13 @@ public class GameController : CheckPointerController
 
     /// <summary>
     /// <para>Sets the score to zero</para>
+    /// <para>Tells the EnemySpawner to repeat the previous spawns</para>
     /// <remarks>This method is executed when the player loses one live</remarks>
     /// </summary>
     private void ShipDestroyed()
     {
         UpdateScore(0);
+        enemySpawner.RepeatSpawns();
     }
 
     /// <summary>

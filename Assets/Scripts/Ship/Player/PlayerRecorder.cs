@@ -71,6 +71,7 @@ public class PlayerRecorder: Controller
     {
         base.Awake();
         stats = GetComponent<Stats>();
+        stats.OnDie += RecordDead;
         records = new Record[(int) (checkPointerController.checkPointTime / timeBetweenRecords)];
         lastRecord = timeBetweenRecords;
         controllable.OnShoot += RecordShoot;
@@ -101,6 +102,14 @@ public class PlayerRecorder: Controller
     private void RecordShoot()
     {
         SaveNewRecord(new Record(transform.position, RecordType.Shoot, GetTime()));
+    }
+
+    /// <summary>
+    /// <para>Records the dead of the player ship</para>
+    /// </summary>
+    private void RecordDead()
+    {
+        SaveNewRecord(new Record(transform.position, RecordType.Die, GetTime()));
     }
 
     /// <summary>
