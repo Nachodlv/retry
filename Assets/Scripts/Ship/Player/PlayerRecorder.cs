@@ -9,7 +9,7 @@ using UnityEngine;
 public class PlayerRecorder: Controller
 {
     [SerializeField][Tooltip("Used to get the checkpoint time")]
-    private CheckPointerController checkPointerController;
+    private LevelManager levelManager;
 
     [SerializeField] [Tooltip("Seconds between each recording")]
     private float timeBetweenRecords;
@@ -48,6 +48,7 @@ public class PlayerRecorder: Controller
     {
         stats.ResetStats();
         if(reproduction != null) StopCoroutine(reproduction);
+     
         reproduction = Reproduce();
         StartCoroutine(reproduction);
     }
@@ -76,7 +77,7 @@ public class PlayerRecorder: Controller
         base.Awake();
         stats = GetComponent<Stats>();
         stats.OnDie += RecordDead;
-        records = new Record[(int) (checkPointerController.checkPointTime / timeBetweenRecords)];
+        records = new Record[(int) (levelManager.LevelDuration / timeBetweenRecords)];
         lastRecord = timeBetweenRecords;
         controllable.OnShoot += RecordShoot;
     }

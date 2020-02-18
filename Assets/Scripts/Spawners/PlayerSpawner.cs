@@ -26,7 +26,7 @@ struct PlayerShip
 /// <para>Spawns the player ships. One ship is always controlled by the PlayerController and the ones destroyed will
 /// be controlled by the PlayerRecorder</para>
 /// </summary>
-public class PlayerSpawner : CheckPointerController
+public class PlayerSpawner: MonoBehaviour
 {
     public event Action OnAllShipsDestroyed;
     public event Action OnShipDestroyed;
@@ -50,6 +50,18 @@ public class PlayerSpawner : CheckPointerController
     private int currentLife;
     private PlayerShip currentShip;
 
+    /// <summary>
+    /// <para>Restore lives and reset the previous player action records</para>
+    /// </summary>
+    public void NextLevel()
+    {
+        livesUI.UpdateValue(lives);
+        ships[currentLife] = ships[0];
+        ships[0] = currentShip;
+        currentShip.PlayerRecorder.StartRecording();
+        currentLife = 0;
+    }
+    
     private void Awake()
     {
         livesUI.UpdateValue(lives);

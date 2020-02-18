@@ -24,7 +24,7 @@ public class EnemySpawner : MonoBehaviour
     private float xOffset;
 
     [SerializeField] [Tooltip("Used to get the checkpoint time")]
-    private CheckPointerController checkPointerController;
+    private LevelManager levelManager;
 
     private float minY;
     private float maxY;
@@ -35,6 +35,7 @@ public class EnemySpawner : MonoBehaviour
     private int totalSpawns;
     private float startingTime;
     private int coroutinesInProgress;
+    private bool spawning = true;
 
     /// <summary>
     /// <para>Starts spawning enemies</para>
@@ -51,6 +52,7 @@ public class EnemySpawner : MonoBehaviour
     /// </summary>
     public void RepeatSpawns()
     {
+        spawning = true;
         currentSpawnIndex = 0;
         currentTick = 0;
         startingTime = Time.time;
@@ -58,12 +60,30 @@ public class EnemySpawner : MonoBehaviour
     }
 
     /// <summary>
+    /// <para>Starts spawning and increases the difficulty level</para>
+    /// </summary>
+    /// <param name="newLevel"></param>
+    public void NextLevel(int newLevel)
+    {
+        BeginSpawning();
+        // TODO increase difficulty
+    }
+
+    /// <summary>
+    /// <para>Stops spawnign enemies</para>
+    /// </summary>
+    public void StopSpawning()
+    {
+        spawning = false;
+    }
+    
+    /// <summary>
     /// <para>Initializes the enemies pools and the spawns array</para>
     /// <para>Calls the BeginSpawning method</para>
     /// </summary>
     private void Awake()
     {
-        spawns = new EnemySpawned[(int) (checkPointerController.checkPointTime / tickDuration)];
+        spawns = new EnemySpawned[(int) (levelManager.LevelDuration / tickDuration)];
         foreach (var enemySpawn in _enemies)
         {
             enemySpawn.InitializePool((newEnemies) => NewEnemies(newEnemies, enemySpawn.Points));
@@ -111,6 +131,7 @@ public class EnemySpawner : MonoBehaviour
     /// </summary>
     private void Update()
     {
+        if (!spawning) return;
         if (currentTick < tickDuration)
         {
             currentTick += Time.deltaTime;

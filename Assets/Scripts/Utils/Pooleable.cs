@@ -1,23 +1,18 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Pooleable : MonoBehaviour
 {
-    private bool isActive;
+    public bool IsActive { get; private set; }
 
-    public bool IsActive => isActive;
-    
     /// <summary>
     /// Activates the Pooleable
     /// </summary>
     public virtual void Activate()
     {
-        if(isActive) return;
+        if(IsActive) return;
         
         gameObject.SetActive(true);
-        isActive = true;
+        IsActive = true;
     }
 
     /// <summary>
@@ -25,9 +20,9 @@ public class Pooleable : MonoBehaviour
     /// </summary>
     public virtual void Deactivate()
     {
-        if (!isActive) return;
+        if (!IsActive) return;
         
         gameObject.SetActive(false);
-        isActive = false;
+        IsActive = false;
     }
 }

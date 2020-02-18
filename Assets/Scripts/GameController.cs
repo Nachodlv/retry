@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameController : CheckPointerController
+public class GameController: MonoBehaviour
 {
     [SerializeField] [Tooltip("Displayer of the score")]
     private ShowNumberUI scoreUI;
@@ -12,6 +12,9 @@ public class GameController : CheckPointerController
     [SerializeField] [Tooltip("Spawner of player ships")]
     private PlayerSpawner playerSpawner;
 
+    [SerializeField] [Tooltip("Manager of checkpoints")]
+    private LevelManager levelManager;
+    
     private float score;
 
     private void Awake()
@@ -21,6 +24,9 @@ public class GameController : CheckPointerController
 
         playerSpawner.OnAllShipsDestroyed += GameOver;
         playerSpawner.OnShipDestroyed += ShipDestroyed;
+
+        levelManager.LevelTransition += LevelTransition;
+        levelManager.NextLevel += NewLevel;
     }
 
     /// <summary>
@@ -45,12 +51,14 @@ public class GameController : CheckPointerController
     /// <summary>
     /// <para>Sets the score to zero</para>
     /// <para>Tells the EnemySpawner to repeat the previous spawns</para>
+    /// <para>Tells the LevelManager to reset the level</para>
     /// <remarks>This method is executed when the player loses one live</remarks>
     /// </summary>
     private void ShipDestroyed()
     {
         UpdateScore(0);
         enemySpawner.RepeatSpawns();
+        levelManager.ResetLevel();
     }
 
     /// <summary>
@@ -61,5 +69,25 @@ public class GameController : CheckPointerController
     {
         score = newScore;
         scoreUI.UpdateValue(score);
+    }
+
+    /// <summary>
+    /// <para>Calls the method NextLevel from the PlayerSpawner and the EnemySpawner</para>
+    /// <remarks>This method is called when the transition time from the previous level is finished</remarks>
+    /// </summary>
+    /// <param name="level">The number of the new level</param>
+    private void NewLevel(int level)
+    {
+        playerSpawner.NextLevel();
+        enemySpawner.NextLevel(level);
+    }
+
+    /// <summary>
+    /// <para>Stops the EnemySpawner from spawning enemies</para>
+    /// <remarks>This method is called when the level time is over</remarks>
+    /// </summary>
+    private void LevelTransition()
+    {
+        enemySpawner.StopSpawning();
     }
 }
