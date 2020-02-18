@@ -5,31 +5,29 @@ using UnityEngine;
 
 public class Pooleable : MonoBehaviour
 {
-    private ObjectPooler objectPooler;
     private bool isActive;
 
+    public bool IsActive => isActive;
+    
     /// <summary>
-    /// Activates the game object.
+    /// Activates the Pooleable
     /// </summary>
-    /// <param name="pooleable">ObjectPooler that will be used when this GameObject is deactivated</param>
-    public virtual void Activate(ObjectPooler pooleable)
+    public virtual void Activate()
     {
         if(isActive) return;
         
         gameObject.SetActive(true);
-        objectPooler = pooleable;
         isActive = true;
     }
 
     /// <summary>
-    /// Deactivated the game object. Tells the object pooler that this game object is deactivated.
+    /// Deactivates the Pooleable
     /// </summary>
     public virtual void Deactivate()
     {
         if (!isActive) return;
         
         gameObject.SetActive(false);
-        objectPooler?.PooleableDeactivated(this);
         isActive = false;
     }
 }

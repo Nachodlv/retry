@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllable: {fileID: 0}
-  bullet: {fileID: -7654395422781112653, guid: e1a42ddcae4decae6bd684a4ebccb84d, type: 3}
+  bullet: {fileID: -8848170959685189865, guid: e1a42ddcae4decae6bd684a4ebccb84d, type: 3}
   cadence: 3
   nonStop: 1
 --- !u!114 &6017480202447470230

@@ -44,4 +44,12 @@ public class EnemyToSpawn
     {
         return _objectPooler.GetNextObject();
     }
+
+    /// <summary>
+    /// <para>Deactivates the enemy pool</para>
+    /// </summary>
+    public void DeactivateEnemy()
+    {
+        _objectPooler.DeactivatePooleables();
+    }
 }

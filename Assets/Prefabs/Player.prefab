@@ -202,8 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e73d06cefc2d912c382be7eabdc099c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllable: {fileID: 0}
-  bullet: {fileID: -7654395422781112653, guid: e1a42ddcae4decae6bd684a4ebccb84d, type: 3}
+  bullet: {fileID: -8848170959685189865, guid: e1a42ddcae4decae6bd684a4ebccb84d, type: 3}
   cadence: 0.5
   nonStop: 1
 --- !u!114 &2752361851093200431
@@ -232,4 +231,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   checkPointerController: {fileID: 5028532737806239094, guid: b0eac32194423d84190a6de348631314,
     type: 3}
-  timeBetweenRecords: 0.1
+  timeBetweenRecords: 0.05

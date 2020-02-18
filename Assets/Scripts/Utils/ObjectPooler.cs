@@ -31,25 +31,30 @@ public class ObjectPooler
         {
             name = parentName
         };
-        this.objectToPool = pooleable;
+        objectToPool = pooleable;
         objects = new List<Pooleable>();
         onGrow = grow;
         Grow();
     }
 
     /// <summary>
-    /// Returns the next Pooleable deactivated.
-    /// If the are no more Pooleables deactivated then it will instantiate more.
+    /// <para>Returns the next available Pooleable. If there is no Pooleable deactivated then it will
+    /// instantiate more</para>
     /// </summary>
     /// <returns></returns>
     public Pooleable GetNextObject()
     {
-        if (objects.Count == 0) Grow();
-
-        var first = objects.First();
-        objects.RemoveAt(0);
-        first.Activate(this);
-        return first;
+        while (true)
+        {
+            foreach (var pooleable in objects)
+            {
+                if (pooleable.IsActive) continue;
+                
+                pooleable.Activate();
+                return pooleable;
+            }
+            Grow(); 
+        }
     }
 
     private void Grow()
@@ -65,12 +70,13 @@ public class ObjectPooler
     }
 
     /// <summary>
-    /// Adds the Pooleable to the objects lists meaning that the Pooleable is ready to be used again.
+    /// <para>Deactivates all the Pooleables</para>
     /// </summary>
-    /// <remarks>This method is executed by the Pooleable itself when is no more needed</remarks>
-    /// <param name="pooleable">The Pooleable that was deactivated</param>
-    public void PooleableDeactivated(Pooleable pooleable)
+    public void DeactivatePooleables()
     {
-        objects.Add(pooleable);
+        foreach (var pooleable in objects)
+        {
+            pooleable.Deactivate();
+        }
     }
 }

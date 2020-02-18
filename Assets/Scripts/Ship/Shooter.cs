@@ -6,9 +6,6 @@
 [RequireComponent(typeof(Controllable))]
 public class Shooter : MonoBehaviour
 {
-    [SerializeField] [Tooltip("Controller that will tell the shooter when to shoot")]
-    private Controllable controllable;
-
     [SerializeField] [Tooltip("Bullet that will be shoot")]
     private Pooleable bullet;
 
@@ -17,10 +14,19 @@ public class Shooter : MonoBehaviour
 
     [SerializeField] [Tooltip("If nonStop is true it will not stop shooting")]
     private bool nonStop = false;
-    
+
+    private Controllable controllable;
     private ObjectPooler _objectPooler;
     private bool _canShoot;
     private float _currentCadency;
+
+    /// <summary>
+    /// <para>Removes the bullets currently present in the Scene</para>
+    /// </summary>
+    public void RemoveBullets()
+    {
+        _objectPooler.DeactivatePooleables();
+    }
 
     /// <summary>
     /// <para>Instantiates a pool of bullets</para>

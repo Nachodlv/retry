@@ -34,7 +34,6 @@ public class EnemySpawner : MonoBehaviour
     private int currentSpawnIndex;
     private int totalSpawns;
     private float startingTime;
-    private List<Pooleable> enemies;
     private int coroutinesInProgress;
 
     /// <summary>
@@ -64,7 +63,6 @@ public class EnemySpawner : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        enemies = new List<Pooleable>();
         spawns = new EnemySpawned[(int) (checkPointerController.checkPointTime / tickDuration)];
         foreach (var enemySpawn in _enemies)
         {
@@ -102,7 +100,6 @@ public class EnemySpawner : MonoBehaviour
     /// <param name="score">The points given when the any of the enemies from the newEnemies list is destroyed</param>
     private void NewEnemies(List<Pooleable> newEnemies, float score)
     {
-        enemies.AddRange(newEnemies);
         foreach (var enemy in newEnemies)
         {
             enemy.GetComponent<Stats>().OnDie += () => OnPointsScored?.Invoke(score);
@@ -197,13 +194,13 @@ public class EnemySpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// <para>Removes the ships present in the screen</para>
+    /// <para>Removes the ships present in the Scene</para>
     /// </summary>
     private void RemoveCurrentShips()
     {
-        foreach (var enemy in enemies)
+        foreach (var enemyToSpawn in _enemies)
         {
-            enemy.Deactivate();
+            enemyToSpawn.DeactivateEnemy();
         }
     }
 }

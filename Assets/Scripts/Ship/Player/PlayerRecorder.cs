@@ -21,6 +21,7 @@ public class PlayerRecorder: Controller
     private bool recording;
     private float startingTime;
     private Vector2 lastPosition;
+    private IEnumerator reproduction;
 
     /// <summary>
     /// <para>Starts recording the player movements</para>
@@ -41,12 +42,14 @@ public class PlayerRecorder: Controller
     }
 
     /// <summary>
-    /// <para>Reproduces the records</para>
+    /// <para>Reproduces the records. If there is any previous recording right now then it stops it.</para>
     /// </summary>
     public void ReproduceRecord()
     {
         stats.ResetStats();
-        StartCoroutine(Reproduce());
+        if(reproduction != null) StopCoroutine(reproduction);
+        reproduction = Reproduce();
+        StartCoroutine(reproduction);
     }
 
     /// <summary>
@@ -63,6 +66,7 @@ public class PlayerRecorder: Controller
                 yield return null;
             MoveToPosition(record.Position);
             if (record.Type == RecordType.Shoot) Shoot();
+            if (record.Type == RecordType.Die) stats.Health = 0;
             yield return null;
         }
     }
@@ -109,7 +113,9 @@ public class PlayerRecorder: Controller
     /// </summary>
     private void RecordDead()
     {
-        SaveNewRecord(new Record(transform.position, RecordType.Die, GetTime()));
+        var position = transform.position;
+        SaveNewRecord(new Record(position, RecordType.Move, GetTime()));
+        SaveNewRecord(new Record(position, RecordType.Die, GetTime() + 1));
     }
 
     /// <summary>
