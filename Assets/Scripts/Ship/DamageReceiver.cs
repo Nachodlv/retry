@@ -77,7 +77,7 @@ public class DamageReceiver : MonoBehaviour
 
     /// <summary>
     /// <para>Reduces the duration of the invincible time.</para>
-    /// <para>The sprite blinks while the GameObject in invincible</para>
+    /// <para>If blink is true, the sprite blinks while the GameObject in invincible</para>
     /// </summary>
     private void Update()
     {

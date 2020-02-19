@@ -66,6 +66,10 @@ public class PlayerController : Controller
         touchController = newTouchController;
     }
 
+    /// <summary>
+    /// <para>Activates a circle around the player ship so the user can identify better the ship that
+    /// is controlling</para>
+    /// </summary>
     private void ActivateCircle()
     {
         circle.SetActive(true);
@@ -74,6 +78,9 @@ public class PlayerController : Controller
         spriteRenderer.color = color;
     }
 
+    /// <summary>
+    /// <para>Removes the circle around the player ship. Reduces the transparency of the sprite.</para>
+    /// </summary>
     private void DeActivateCircle()
     {
         circle.SetActive(false);
