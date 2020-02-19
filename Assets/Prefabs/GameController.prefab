@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8586215e3d6741468d8e7f11f28835b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelDuration: 20
+  levelDuration: 50
   currentLevel: 1
   levelUI: {fileID: 0}
   levelTransitionTime: 5

@@ -16,6 +16,9 @@ public class DamageReceiver : MonoBehaviour
     [SerializeField] [Tooltip("Time in seconds where the ships cannot be hit again")]
     private float invincibleTime;
 
+    [SerializeField] [Tooltip("If the ship should blink when hit")]
+    private bool blink;
+
     private Stats _stats;
     private Pooleable _pooleable;
     private Rigidbody2D _rigidbody2D;
@@ -84,15 +87,17 @@ public class DamageReceiver : MonoBehaviour
         {
             _currentInvincibleTime = 0;
             _invincible = false;
-            _spriteRenderer.color = _originalColor;
+            if (blink) _spriteRenderer.color = _originalColor;
             return;
         }
 
         _currentInvincibleTime += Time.deltaTime;
 
+        if (!blink) return;
+
         var color = _originalColor;
         var lowAlphaColor = color;
         lowAlphaColor.a /= 2;
-        _spriteRenderer.color = Color.Lerp(color, lowAlphaColor, Mathf.PingPong(Time.time * 2 ,1));
+        _spriteRenderer.color = Color.Lerp(color, lowAlphaColor, Mathf.PingPong(Time.time * 2, 1));
     }
 }

@@ -6,14 +6,31 @@ using UnityEngine;
 /// <summary>
 /// <para>Fire events whenever the touch controller is moved</para>
 /// </summary>
+[RequireComponent(typeof(SpriteRenderer))]
 public class PlayerController : Controller
 {
-    private SimpleTouchController touchController;
-    [NonSerialized] public bool Enable;
+    [SerializeField][Tooltip("Circle that represents that the user is controlling the ship")] 
+    private GameObject circle;
     
+    private SimpleTouchController touchController;
+    private SpriteRenderer spriteRenderer;
+    private bool enable;
+
+    public bool Enable
+    {
+        get => enable;
+        set
+        {
+            if(value) ActivateCircle();
+            else DeActivateCircle();
+            enable = value;
+        }
+    }
+
     private void Awake()
     {
         base.Awake();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Start()
@@ -47,5 +64,21 @@ public class PlayerController : Controller
     public void SetTouchController(SimpleTouchController newTouchController)
     {
         touchController = newTouchController;
+    }
+
+    private void ActivateCircle()
+    {
+        circle.SetActive(true);
+        var color = spriteRenderer.color;
+        color.a = 1;
+        spriteRenderer.color = color;
+    }
+
+    private void DeActivateCircle()
+    {
+        circle.SetActive(false);
+        var color = spriteRenderer.color;
+        color.a = 0.5f;
+        spriteRenderer.color = color;
     }
 }

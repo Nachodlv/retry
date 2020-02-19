@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c7e8b2d9785019c08c383277d0afa72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 15
   damage: 2
   health: 0
 --- !u!50 &3660461209234161889
@@ -151,6 +151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bounceForce: 0
   invincibleTime: 0
+  blink: 0
 --- !u!114 &3660461209234161892
 MonoBehaviour:
   m_ObjectHideFlags: 0

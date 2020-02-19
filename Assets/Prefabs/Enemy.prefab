@@ -190,6 +190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bounceForce: 5
   invincibleTime: 0.5
+  blink: 1
 --- !u!114 &850469503853150210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,7 +203,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e73d06cefc2d912c382be7eabdc099c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllable: {fileID: 0}
   bullet: {fileID: -8848170959685189865, guid: e1a42ddcae4decae6bd684a4ebccb84d, type: 3}
   cadence: 3
   nonStop: 1

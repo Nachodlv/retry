@@ -3,7 +3,6 @@
 /// <summary>
 /// <para>Uses a Controllable to control a GameObject</para>
 /// </summary>
-[RequireComponent(typeof(Controllable))]
 public abstract class Controller : MonoBehaviour
 {
     protected Controllable controllable;

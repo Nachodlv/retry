@@ -485,7 +485,6 @@ GameObject:
   m_Component:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
-  - component: {fileID: 519420029}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -493,14 +492,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &519420029
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -2084,6 +2075,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameController
       objectReference: {fileID: 0}
+    - target: {fileID: 5125769392608736576, guid: b0eac32194423d84190a6de348631314,
+        type: 3}
+      propertyPath: levelUI
+      value: 
+      objectReference: {fileID: 773250011}
     - target: {fileID: 5028532737806239094, guid: b0eac32194423d84190a6de348631314,
         type: 3}
       propertyPath: scoreUI
@@ -2154,10 +2150,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5125769392608736576, guid: b0eac32194423d84190a6de348631314,
-        type: 3}
-      propertyPath: levelUI
-      value: 
-      objectReference: {fileID: 773250011}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0eac32194423d84190a6de348631314, type: 3}

@@ -143,6 +143,7 @@ public class PlayerSpawner: MonoBehaviour
         for (var i = 0; i < currentLife; i++)
         {
             var playerRecorder = ships[i].PlayerRecorder;
+            ships[i].PlayerController.Enable = false;
             var shipGameObject = playerRecorder.gameObject;
             shipGameObject.SetActive(true);
             shipGameObject.transform.position = initialPosition;
