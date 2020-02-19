@@ -43,9 +43,10 @@ public class PlayerSpawner: MonoBehaviour
     [SerializeField] [Tooltip("Display of lives")]
     private ShowNumberUI livesUI;
 
-    [SerializeField] [Tooltip("Initial position of the ship")]
+    [SerializeField] [Tooltip("Offset on the X axis for the player starting point")]
+    private float offsetInitialPosition;
+    
     private Vector2 initialPosition;
-
     private PlayerShip[] ships;
     private int currentLife;
     private PlayerShip currentShip;
@@ -64,6 +65,10 @@ public class PlayerSpawner: MonoBehaviour
     
     private void Awake()
     {
+        var myCamera = Camera.main;
+        var bounds = CameraBounds.GetCameraBounds(myCamera);
+        var middle = (bounds.max.y - bounds.min.y) / 2 + bounds.min.y;
+        initialPosition = new Vector2(bounds.min.x + offsetInitialPosition, middle);
         livesUI.UpdateValue(lives);
         InstantiatePlayerShips();
     }

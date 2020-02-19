@@ -1939,7 +1939,7 @@ MonoBehaviour:
   player: {fileID: 2752361851093200433, guid: b531015e8df6a0c498cd59c3f7706d76, type: 3}
   lives: 10
   livesUI: {fileID: 1988914825}
-  initialPosition: {x: -11, y: 0}
+  offsetInitialPosition: 2
 --- !u!4 &1921557434
 Transform:
   m_ObjectHideFlags: 0
@@ -2055,7 +2055,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2104557110}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.438264, y: -0.33147514, z: -19.704262}
+  m_LocalPosition: {x: -9.21, y: 0.32, z: -19.704262}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 314664936}
