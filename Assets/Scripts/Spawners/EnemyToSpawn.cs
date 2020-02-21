@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 /// <summary>
@@ -22,9 +23,8 @@ public class EnemyToSpawn
     private ObjectPooler _objectPooler;
 
     public float SpawnProbability => spawnProbability;
-    public Pooleable Enemy => enemy;
-
     public float Points => points;
+    public List<Stats> enemyStats;
 
     /// <summary>
     /// <para>Creates a pool of enemies for the EnemySpawn</para>
@@ -32,8 +32,14 @@ public class EnemyToSpawn
     /// <param name="newEnemies">Action that will be executed when the pool of enemies grows</param>
     public void InitializePool(Action<List<Pooleable>> newEnemies)
     {
+        var quantityOfEnemies = (int) spawnProbability * 10 + 3;
         _objectPooler = new ObjectPooler();
-        _objectPooler.InstantiateObjects((int) spawnProbability * 10 + 3, enemy, enemy.name, newEnemies);
+        enemyStats = new List<Stats>(quantityOfEnemies);
+        _objectPooler.InstantiateObjects(quantityOfEnemies, enemy, enemy.name, enemies =>
+        {
+            GetEnemyStats(enemies);
+            newEnemies(enemies);
+        });
     }
 
     /// <summary>
@@ -51,5 +57,29 @@ public class EnemyToSpawn
     public void DeactivateEnemy()
     {
         _objectPooler.DeactivatePooleables();
+    }
+
+    /// <summary>
+    /// <para>Increases the stats of the current enemies inside the pool</para>
+    /// </summary>
+    /// <param name="level"></param>
+    public void UpdateStats(int level)
+    {
+        foreach (var enemyStat in enemyStats)
+        {
+            enemyStat.IncreaseStats(level);
+        }
+    }
+
+    /// <summary>
+    /// <para>Gets the stats of the new enemies added to the pool</para>
+    /// </summary>
+    /// <param name="enemies"></param>
+    private void GetEnemyStats(List<Pooleable> enemies)
+    {
+        foreach (var pooleable in enemies)
+        {
+            enemyStats.Add(pooleable.GetComponent<Stats>());
+        }
     }
 }

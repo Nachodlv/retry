@@ -101,9 +101,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c7e8b2d9785019c08c383277d0afa72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
+  speed: 30
   damage: 1
   health: 5
+  maxSpeed: 13
 --- !u!50 &5212998652918081632
 Rigidbody2D:
   serializedVersion: 4
@@ -137,7 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6eaa0718b08623dc98c9c14b4c9e656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  constantVelocity: 0
+  constantVelocity: 1
 --- !u!114 &5212998652918081634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,7 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceForce: 5
-  invincibleTime: 0.5
+  invincibleTime: 0
   blink: 1
 --- !u!114 &850469503853150210
 MonoBehaviour:

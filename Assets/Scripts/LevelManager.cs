@@ -14,8 +14,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] [Tooltip("Duration of each level in seconds")]
     private float levelDuration;
 
-    [SerializeField] [FormerlySerializedAs("initialLevel")] [Tooltip("Starting level")]
-    private int currentLevel;
+    [FormerlySerializedAs("initialLevel")] [Tooltip("Starting level")]
+    public int currentLevel;
 
     [SerializeField] [Tooltip("Level UI")] private ShowNumberUI levelUI;
 
@@ -56,6 +56,7 @@ public class LevelManager : MonoBehaviour
             transitioning = false;
             return;
         }
+
         if (currentLevelDuration >= levelDuration)
         {
             transitioning = true;

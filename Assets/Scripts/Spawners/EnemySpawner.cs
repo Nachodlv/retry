@@ -66,11 +66,14 @@ public class EnemySpawner : MonoBehaviour
     public void NextLevel(int newLevel)
     {
         BeginSpawning();
-        // TODO increase difficulty
+        foreach (var enemyToSpawn in _enemies)
+        {
+            enemyToSpawn.UpdateStats(newLevel);
+        }
     }
 
     /// <summary>
-    /// <para>Stops spawnign enemies</para>
+    /// <para>Stops spawning enemies</para>
     /// </summary>
     public void StopSpawning()
     {
@@ -79,7 +82,7 @@ public class EnemySpawner : MonoBehaviour
     
     /// <summary>
     /// <para>Initializes the enemies pools and the spawns array</para>
-    /// <para>Calls the BeginSpawning method</para>
+    /// <para>Calls the NextLevel method with the current level provided by the LevelManager</para>
     /// </summary>
     private void Awake()
     {
@@ -89,7 +92,7 @@ public class EnemySpawner : MonoBehaviour
             enemySpawn.InitializePool((newEnemies) => NewEnemies(newEnemies, enemySpawn.Points));
         }
 
-        BeginSpawning();
+        NextLevel(levelManager.currentLevel);
     }
 
     private void Start()
@@ -102,9 +105,9 @@ public class EnemySpawner : MonoBehaviour
     /// </summary>
     private void SetUpLimits()
     {
-        var camera = Camera.main;
-        if (camera == null) return;
-        var bounds = CameraBounds.GetCameraBounds(camera);
+        var myCamera = Camera.main;
+        if (myCamera == null) return;
+        var bounds = CameraBounds.GetCameraBounds(myCamera);
         var max = bounds.max;
         var min = bounds.min;
         limitX = max.x + xOffset;
@@ -190,7 +193,8 @@ public class EnemySpawner : MonoBehaviour
         var pooleable = enemy.GetNextEnemy();
         var position = new Vector2(limitX, randomHeight);
         pooleable.transform.position = position;
-        spawns[currentSpawnIndex] = new EnemySpawned(enemy, position, Time.time - startingTime);
+        var enemySpawned = new EnemySpawned(enemy, position, Time.time - startingTime);
+        spawns[currentSpawnIndex] = enemySpawned;
         currentSpawnIndex++;
         totalSpawns++;
     }

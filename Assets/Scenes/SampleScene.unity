@@ -1041,9 +1041,11 @@ MonoBehaviour:
   - enemy: {fileID: 6017480202447470230, guid: 24f93034992eaea3c80032d6d36b1ed4, type: 3}
     points: 10
     spawnProbability: 0.75
+    enemyStats: []
   - enemy: {fileID: 2628942029782229672, guid: 3c22817ec34574b13aaa8ead2c77473e, type: 3}
     points: 20
     spawnProbability: 0.25
+    enemyStats: []
   xOffset: 1
   levelManager: {fileID: 5125769392608736576, guid: b0eac32194423d84190a6de348631314,
     type: 3}
@@ -1937,7 +1939,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   touchController: {fileID: 1871871457}
   player: {fileID: 2752361851093200433, guid: b531015e8df6a0c498cd59c3f7706d76, type: 3}
-  lives: 10
+  lives: 5
   livesUI: {fileID: 1988914825}
   offsetInitialPosition: 2
 --- !u!4 &1921557434

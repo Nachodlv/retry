@@ -196,9 +196,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c7e8b2d9785019c08c383277d0afa72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 13
+  speed: 7
   damage: 5
   health: 1
+  maxSpeed: 0
 --- !u!114 &2752361851093200433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,6 +287,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bounceForce: 1
   invincibleTime: 1
+  blink: 0
 --- !u!114 &2752361851093200428
 MonoBehaviour:
   m_ObjectHideFlags: 0

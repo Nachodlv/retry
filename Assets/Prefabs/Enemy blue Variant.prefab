@@ -82,6 +82,11 @@ PrefabInstance:
       propertyPath: m_Color.b
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5212998652918081633, guid: 24f93034992eaea3c80032d6d36b1ed4,
+        type: 3}
+      propertyPath: health
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 850469503853150210, guid: 24f93034992eaea3c80032d6d36b1ed4,
         type: 3}
       propertyPath: cadence

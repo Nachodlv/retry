@@ -15,6 +15,8 @@ public class ObjectPooler
     private Pooleable objectToPool;
     private Action<List<Pooleable>> onGrow;
 
+    public List<Pooleable> Objects => objects;
+
     /// <summary>
     /// Instantiates game objects with the given <paramref name="pooleable"/> and <paramref name="quantity"/>.
     /// The new gameObjects will have their parent called <paramref name="parentName"/>

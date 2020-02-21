@@ -30,12 +30,12 @@ public class GameController: MonoBehaviour
     }
 
     /// <summary>
-    /// <para>Sums the points with the score</para>
+    /// <para>Sums the points with the score increased by the current level</para>
     /// </summary>
     /// <param name="points"></param>
     private void PointsScored(float points)
     {
-        UpdateScore(score + points);
+        UpdateScore(score + points + (int) ((levelManager.currentLevel - 1) * 0.2f * points));
     }
 
     /// <summary>
@@ -67,7 +67,7 @@ public class GameController: MonoBehaviour
     /// <param name="newScore"></param>
     private void UpdateScore(float newScore)
     {
-        score = newScore;
+        score = newScore ;
         scoreUI.UpdateValue(score);
     }
 
