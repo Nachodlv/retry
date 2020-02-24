@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreUI: {fileID: 0}
+  levelScoreUI: {fileID: 0}
   enemySpawner: {fileID: 0}
   playerSpawner: {fileID: 0}
   levelManager: {fileID: 5125769392608736576}

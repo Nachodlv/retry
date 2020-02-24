@@ -5,6 +5,9 @@ public class GameController: MonoBehaviour
 {
     [SerializeField] [Tooltip("Displayer of the score")]
     private ShowNumberUI scoreUI;
+
+    [SerializeField] [Tooltip("Display of the current level score")]
+    private ShowNumberUI levelScoreUI;
     
     [SerializeField] [Tooltip("Spawner of enemies")]
     private EnemySpawner enemySpawner;
@@ -15,11 +18,13 @@ public class GameController: MonoBehaviour
     [SerializeField] [Tooltip("Manager of checkpoints")]
     private LevelManager levelManager;
     
-    private float score;
+    private int score;
+    private int levelScore;
 
     private void Awake()
     {
         scoreUI.UpdateValue(score);
+        levelScoreUI.UpdateValue(levelScore);
         enemySpawner.OnPointsScored += PointsScored;
 
         playerSpawner.OnAllShipsDestroyed += GameOver;
@@ -30,12 +35,12 @@ public class GameController: MonoBehaviour
     }
 
     /// <summary>
-    /// <para>Sums the points with the score increased by the current level</para>
+    /// <para>Sums the points with the level score increased by the current level</para>
     /// </summary>
     /// <param name="points"></param>
-    private void PointsScored(float points)
+    private void PointsScored(int points)
     {
-        UpdateScore(score + points + (int) ((levelManager.currentLevel - 1) * 0.2f * points));
+        UpdateLevelScore(levelScore + points + (int) ((levelManager.currentLevel - 1) * 0.2f * points));
     }
 
     /// <summary>
@@ -49,35 +54,39 @@ public class GameController: MonoBehaviour
     }
 
     /// <summary>
-    /// <para>Sets the score to zero</para>
+    /// <para>Sets the level score to zero</para>
     /// <para>Tells the EnemySpawner to repeat the previous spawns</para>
     /// <para>Tells the LevelManager to reset the level</para>
     /// <remarks>This method is executed when the player loses one live</remarks>
     /// </summary>
     private void ShipDestroyed()
     {
-        UpdateScore(0);
+        UpdateLevelScore(0);
         enemySpawner.RepeatSpawns();
         levelManager.ResetLevel();
     }
 
     /// <summary>
-    /// <para>Sets the score to newScore and updates the UI</para>
+    /// <para>Sets the level score to newScore and updates the UI</para>
     /// </summary>
     /// <param name="newScore"></param>
-    private void UpdateScore(float newScore)
+    private void UpdateLevelScore(int newScore)
     {
-        score = newScore ;
-        scoreUI.UpdateValue(score);
+        levelScore = newScore ;
+        levelScoreUI.UpdateValue(levelScore);
     }
 
     /// <summary>
     /// <para>Calls the method NextLevel from the PlayerSpawner and the EnemySpawner</para>
+    /// <para>Adds the level score to the score and sets the level score to zero</para>
     /// <remarks>This method is called when the transition time from the previous level is finished</remarks>
     /// </summary>
     /// <param name="level">The number of the new level</param>
     private void NewLevel(int level)
     {
+        score += levelScore;
+        UpdateLevelScore(0);
+        scoreUI.UpdateValue(score);
         playerSpawner.NextLevel();
         enemySpawner.NextLevel(level);
     }

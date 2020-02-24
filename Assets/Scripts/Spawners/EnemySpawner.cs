@@ -9,7 +9,7 @@ using Random = UnityEngine.Random;
 /// </summary>
 public class EnemySpawner : MonoBehaviour
 {
-    public event Action<float> OnPointsScored;
+    public event Action<int> OnPointsScored;
 
     [SerializeField] [Tooltip("Time between each enemy spawn")]
     private float tickDuration;
@@ -116,16 +116,19 @@ public class EnemySpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// <para>Subscribes to the OnDie event of the newEnemies</para>
+    /// <para>Subscribes to the OnDie event of the newEnemies and change the stats of the enemies to the
+    /// corresponding level</para>
     /// <remarks>This method is called when the enemy pool grows</remarks>
     /// </summary>
     /// <param name="newEnemies"></param>
     /// <param name="score">The points given when the any of the enemies from the newEnemies list is destroyed</param>
-    private void NewEnemies(List<Pooleable> newEnemies, float score)
+    private void NewEnemies(List<Pooleable> newEnemies, int score)
     {
         foreach (var enemy in newEnemies)
         {
-            enemy.GetComponent<Stats>().OnDie += () => OnPointsScored?.Invoke(score);
+            var stats = enemy.GetComponent<Stats>();
+            stats.OnDie += () => OnPointsScored?.Invoke(score);
+            stats.IncreaseStats(levelManager.currentLevel);
         }
     }
 
@@ -228,4 +231,5 @@ public class EnemySpawner : MonoBehaviour
             enemyToSpawn.DeactivateEnemy();
         }
     }
+    
 }

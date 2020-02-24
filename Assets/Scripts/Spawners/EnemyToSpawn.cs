@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using UnityEngine;
 
 /// <summary>
@@ -13,7 +12,7 @@ public class EnemyToSpawn
     private Pooleable enemy;
 
     [SerializeField] [Tooltip("Points given to the player when the enemy is defeated")]
-    private float points;
+    private int points;
 
     [SerializeField]
     [Tooltip("Probability to be spawned in each tick. The sum of all the spawn probabilities shouldn't surpass 1")]
@@ -23,7 +22,7 @@ public class EnemyToSpawn
     private ObjectPooler _objectPooler;
 
     public float SpawnProbability => spawnProbability;
-    public float Points => points;
+    public int Points => points;
     public List<Stats> enemyStats;
 
     /// <summary>
