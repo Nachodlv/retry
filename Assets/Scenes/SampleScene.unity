@@ -609,7 +609,6 @@ GameObject:
   - component: {fileID: 314664935}
   - component: {fileID: 314664937}
   - component: {fileID: 314664938}
-  - component: {fileID: 314664934}
   m_Layer: 10
   m_Name: Inner limit
   m_TagString: Untagged
@@ -617,18 +616,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &314664934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 314664933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91223e7989ad0674086ea2d0651cbe8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!68 &314664935
 EdgeCollider2D:
   m_ObjectHideFlags: 0
