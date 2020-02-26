@@ -2,7 +2,7 @@
 using UnityEngine;
 
 /// <summary>
-/// <para>Moves the enemy in a straight line by decreasing the Y Axis</para>
+/// <para>Moves the enemy in a straight line by decreasing the X Axis</para>
 /// </summary>
 public class StraightMovement : EnemyMovement
 {
@@ -10,10 +10,16 @@ public class StraightMovement : EnemyMovement
     /// <summary>
     /// <para>Returns a vector pointing to the left</para>
     /// </summary>
-    /// <param name="initialY"></param>
     /// <returns></returns>
-    public Vector2 Move(float initialY)
+    public Vector2 Move()
     {
         return new Vector2(-1, 0);
+    }
+
+    /// <summary>
+    /// <para>Does nothing</para>
+    /// </summary>
+    public void Spawn()
+    {
     }
 }

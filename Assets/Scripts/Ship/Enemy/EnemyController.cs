@@ -9,8 +9,10 @@ public class EnemyController : Controller
     [SerializeField][Tooltip("How the enemy will move")] 
     private EnemyMovementEnum enemyMovementEnum = EnemyMovementEnum.Straight;
 
+    [SerializeField] [Tooltip("Enemy ship width")]
+    private float shipWidth;
+    
     private EnemyMovement _enemyMovement;
-    private float initialY;
     enum EnemyMovementEnum
     {
         Straight,
@@ -25,7 +27,7 @@ public class EnemyController : Controller
 
     private void OnEnable()
     {
-        initialY = transform.position.y;
+        _enemyMovement.Spawn();
     }
 
     /// <summary>
@@ -33,7 +35,7 @@ public class EnemyController : Controller
     /// </summary>
     private void FixedUpdate()
     {
-        Move(_enemyMovement.Move(initialY));
+        Move(_enemyMovement.Move());
     }
 
     /// <summary>
@@ -48,7 +50,7 @@ public class EnemyController : Controller
                 _enemyMovement = new StraightMovement();
                 break;
             case EnemyMovementEnum.ZigZag:
-                _enemyMovement = new ZigZagMovement();
+                _enemyMovement = new ZigZagMovement(transform, shipWidth);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();

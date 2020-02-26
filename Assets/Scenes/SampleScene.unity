@@ -1496,10 +1496,14 @@ MonoBehaviour:
   _enemies:
   - enemy: {fileID: 6017480202447470230, guid: 24f93034992eaea3c80032d6d36b1ed4, type: 3}
     points: 10
-    spawnProbability: 0.75
+    spawnProbability: 0.65
     enemyStats: []
   - enemy: {fileID: 2628942029782229672, guid: 3c22817ec34574b13aaa8ead2c77473e, type: 3}
     points: 20
+    spawnProbability: 0.1
+    enemyStats: []
+  - enemy: {fileID: 3859464004854401314, guid: a23950d5595793146ad2f7347de8aae6, type: 3}
+    points: 5
     spawnProbability: 0.25
     enemyStats: []
   xOffset: 1
@@ -2530,16 +2534,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5125769392608736576, guid: b0eac32194423d84190a6de348631314,
-        type: 3}
-      propertyPath: levelUI
-      value: 
-      objectReference: {fileID: 773250011}
     - target: {fileID: 5028532737806239092, guid: b0eac32194423d84190a6de348631314,
         type: 3}
       propertyPath: m_Name
       value: GameController
       objectReference: {fileID: 0}
+    - target: {fileID: 5125769392608736576, guid: b0eac32194423d84190a6de348631314,
+        type: 3}
+      propertyPath: levelUI
+      value: 
+      objectReference: {fileID: 773250011}
+    - target: {fileID: 5028532737806239094, guid: b0eac32194423d84190a6de348631314,
+        type: 3}
+      propertyPath: scoreUI
+      value: 
+      objectReference: {fileID: 1875496339}
+    - target: {fileID: 5028532737806239094, guid: b0eac32194423d84190a6de348631314,
+        type: 3}
+      propertyPath: levelScoreUI
+      value: 
+      objectReference: {fileID: 312240769}
+    - target: {fileID: 5028532737806239094, guid: b0eac32194423d84190a6de348631314,
+        type: 3}
+      propertyPath: enemySpawner
+      value: 
+      objectReference: {fileID: 1188463698}
+    - target: {fileID: 5028532737806239094, guid: b0eac32194423d84190a6de348631314,
+        type: 3}
+      propertyPath: playerSpawner
+      value: 
+      objectReference: {fileID: 1921557433}
     - target: {fileID: 5028532737806239093, guid: b0eac32194423d84190a6de348631314,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2595,25 +2619,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5028532737806239094, guid: b0eac32194423d84190a6de348631314,
-        type: 3}
-      propertyPath: scoreUI
-      value: 
-      objectReference: {fileID: 1875496339}
-    - target: {fileID: 5028532737806239094, guid: b0eac32194423d84190a6de348631314,
-        type: 3}
-      propertyPath: levelScoreUI
-      value: 
-      objectReference: {fileID: 312240769}
-    - target: {fileID: 5028532737806239094, guid: b0eac32194423d84190a6de348631314,
-        type: 3}
-      propertyPath: enemySpawner
-      value: 
-      objectReference: {fileID: 1188463698}
-    - target: {fileID: 5028532737806239094, guid: b0eac32194423d84190a6de348631314,
-        type: 3}
-      propertyPath: playerSpawner
-      value: 
-      objectReference: {fileID: 1921557433}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0eac32194423d84190a6de348631314, type: 3}

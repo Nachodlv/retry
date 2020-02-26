@@ -10,7 +10,11 @@ public interface EnemyMovement
     /// <summary>
     /// <para>Returns the position to where the enemy should move</para>
     /// </summary>
-    /// <param name="initialY">The position in the Y Axis where the enemy has spawned</param>
     /// <returns></returns>
-    Vector2 Move(float initialY);
+    Vector2 Move();
+    
+    /// <summary>
+    /// <para>Tells the EnemyMovement that the enemy ship has spawn again</para>
+    /// </summary>
+    void Spawn();
 }
