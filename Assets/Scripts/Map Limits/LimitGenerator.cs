@@ -40,7 +40,7 @@ public class LimitGenerator : MonoBehaviour
         var bounds = CameraBounds.GetCameraBounds(myCamera);
         var max = bounds.max;
         var min = bounds.min;
-       return new[]
+        return new[]
         {
             new Vector2(max.x + extraSpace, max.y + extraSpace),
             new Vector2(min.x - extraSpace, max.y + extraSpace),

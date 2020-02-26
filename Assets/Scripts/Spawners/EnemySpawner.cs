@@ -14,14 +14,14 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] [Tooltip("Time between each enemy spawn")]
     private float tickDuration;
 
-    [SerializeField] [Tooltip("Stats modifier of the enemies")]
-    private int _dificultyLevel;
-
     [SerializeField] [Tooltip("Enemies to be spawned")]
     private EnemyToSpawn[] _enemies;
 
     [SerializeField] [Tooltip("Offset in the X axis that the enemies will be spawned")]
     private float xOffset;
+
+    [SerializeField] [Tooltip("Offset in the Y axis")]
+    private float yOffset;
 
     [SerializeField] [Tooltip("Used to get the checkpoint time")]
     private LevelManager levelManager;
@@ -111,8 +111,8 @@ public class EnemySpawner : MonoBehaviour
         var max = bounds.max;
         var min = bounds.min;
         limitX = max.x + xOffset;
-        minY = min.y;
-        maxY = max.y;
+        minY = min.y + yOffset;
+        maxY = max.y - yOffset;
     }
 
     /// <summary>

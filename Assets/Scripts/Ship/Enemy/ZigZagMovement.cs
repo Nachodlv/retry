@@ -31,11 +31,11 @@ public class ZigZagMovement : EnemyMovement
         if (goingUp)
         {
             if (y > maxY) goingUp = false;
-            return new Vector2(-0.5f, 1);
+            return new Vector2(-0.8f, 1f);
         }
 
         if (y < minY) goingUp = true;
-        return new Vector2(-0.5f, -1);
+        return new Vector2(-0.8f, -1f);
     }
 
     /// <summary>
