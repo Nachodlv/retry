@@ -24,10 +24,10 @@ public class GameController: MonoBehaviour
 
     private void Awake()
     {
-        enemySpawner.OnPointsScored += PointsScored;
+        enemySpawner.OnEnemyShipDestroyed += EnemyShipDestroyed;
 
         playerSpawner.OnAllShipsDestroyed += GameOver;
-        playerSpawner.OnShipDestroyed += ShipDestroyed;
+        playerSpawner.OnPlayerDestroyed += PlayerDestroyed;
 
         levelManager.LevelTransition += LevelTransition;
         levelManager.NextLevel += NewLevel;
@@ -42,8 +42,9 @@ public class GameController: MonoBehaviour
     /// <summary>
     /// <para>Sums the points with the level score increased by the current level</para>
     /// </summary>
+    /// <param name="enemy">This parameter is ignored</param>
     /// <param name="points"></param>
-    private void PointsScored(int points)
+    private void EnemyShipDestroyed(GameObject enemy, int points)
     {
         UpdateLevelScore(levelScore + points + (int) ((levelManager.currentLevel - 1) * 0.2f * points));
     }
@@ -64,7 +65,7 @@ public class GameController: MonoBehaviour
     /// <para>Tells the LevelManager to reset the level</para>
     /// <remarks>This method is executed when the player loses one live</remarks>
     /// </summary>
-    private void ShipDestroyed()
+    private void PlayerDestroyed()
     {
         UpdateLevelScore(0);
         enemySpawner.RepeatSpawns();

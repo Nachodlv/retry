@@ -9,7 +9,8 @@ using Random = UnityEngine.Random;
 /// </summary>
 public class EnemySpawner : MonoBehaviour
 {
-    public event Action<int> OnPointsScored;
+    public delegate void EnemyShipDestroyed(GameObject enemy, int points);
+    public event EnemyShipDestroyed OnEnemyShipDestroyed;
 
     [SerializeField] [Tooltip("Time between each enemy spawn")]
     private float tickDuration;
@@ -127,7 +128,7 @@ public class EnemySpawner : MonoBehaviour
         foreach (var enemy in newEnemies)
         {
             var stats = enemy.GetComponent<Stats>();
-            stats.OnDie += () => OnPointsScored?.Invoke(score);
+            stats.OnDie += () => OnEnemyShipDestroyed?.Invoke(stats.gameObject, score);
             stats.IncreaseStats(levelManager.currentLevel);
         }
     }

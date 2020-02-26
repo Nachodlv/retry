@@ -29,7 +29,8 @@ struct PlayerShip
 public class PlayerSpawner: MonoBehaviour
 {
     public event Action OnAllShipsDestroyed;
-    public event Action OnShipDestroyed;
+    public event Action OnPlayerDestroyed;
+    public event Action<GameObject> OnShipDestroyed;
 
     [SerializeField] [Tooltip("Touch controller to move the player ship")]
     private SimpleTouchController touchController;
@@ -125,13 +126,17 @@ public class PlayerSpawner: MonoBehaviour
     }
 
     /// <summary>
-    /// <para>Initializes the next available ship if there is any and invokes the OnShipDestroyed event.</para>
+    /// <para>Invokes the OnShipDestroyed event</para>
+    /// <para>If there are lives left, initializes the next available ship if there is any and invokes the
+    /// OnPlayerDestroyed event.</para>
     /// <para>If there is no ships available then the OnAllShipsDestroyed event will be invoked</para>
     /// <remarks>This method is executed when a player ship is destroyed</remarks>
     /// </summary>
     /// <param name="ship"></param>
     private void OnShipDie(PlayerShip ship)
     {
+        OnShipDestroyed?.Invoke(ship.PlayerController.gameObject);
+
         if (ship.PlayerController != ships[currentLife].PlayerController) return;
 
         currentLife++;
@@ -140,7 +145,7 @@ public class PlayerSpawner: MonoBehaviour
         else
         {
             InitializeShip();
-            OnShipDestroyed?.Invoke();
+            OnPlayerDestroyed?.Invoke();
         }
     }
 

@@ -45,7 +45,7 @@ public class PlayerController : Controller
     /// <param name="present">If the user is currently touching the touch control</param>
     private void TouchControllerState(bool present)
     {
-        if(!present && Enable) Move(Vector2.zero);
+        if (!present && Enable) Move(Vector2.zero);
     }
 
     /// <summary>
@@ -54,7 +54,7 @@ public class PlayerController : Controller
     /// <param name="direction"></param>
     private new void Move(Vector2 direction)
     {
-        if(Enable) base.Move(direction);
+        if (Enable) base.Move(direction);
     }
 
     /// <summary>
