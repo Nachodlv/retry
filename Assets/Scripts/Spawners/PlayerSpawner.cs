@@ -69,8 +69,12 @@ public class PlayerSpawner: MonoBehaviour
         var bounds = CameraBounds.GetCameraBounds(myCamera);
         var middle = (bounds.max.y - bounds.min.y) / 2 + bounds.min.y;
         initialPosition = new Vector2(bounds.min.x + offsetInitialPosition, middle);
-        livesUI.UpdateValue(lives);
         InstantiatePlayerShips();
+    }
+
+    private void Start()
+    {
+        livesUI.UpdateValue(lives);
     }
 
     /// <summary>

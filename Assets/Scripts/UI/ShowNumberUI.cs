@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Globalization;
 using TMPro;
 using UnityEngine;
+using Utils;
 
 /// <summary>
 /// <para>Displays a float in a TextMeshProUGUI</para>
@@ -13,32 +15,30 @@ public class ShowNumberUI : MonoBehaviour
 
     [SerializeField] [Tooltip("Time it takes to change to a new value")]
     private float timeToChangeValue = 1;
+
+    [SerializeField] [Tooltip("Minimum time it takes to change a number")]
+    private float minimumTimePerNumber;
     
     private int newValue;
     private int previousValue;
     private IEnumerator coroutine;
+    private CoroutineQueue coroutineQueue;
     
     /// <summary>
-    /// <para>Starts a coroutine to change the value of the UI. The coroutine makes a transition between the old
-    /// value and the new value</para>
+    /// <para>Adds a new coroutine to the coroutineQueue.
+    /// This coroutine will change the previous value to the new value</para>
     /// </summary>
     /// <param name="value">The value will be converted to string</param>
     public void UpdateValue(int value)
     {
-        if (coroutine != null)
-        {
-            StopCoroutine(coroutine);
-            previousValue = newValue;
-        }
-
+        previousValue = newValue;
         newValue = value;
         if (previousValue == newValue)
         {
             UpdateValueUI(previousValue);
             return;
         }
-        coroutine = ChangeValue();
-        StartCoroutine(coroutine);
+        coroutineQueue.AddCoroutine(ChangeValue());
     }
 
     /// <summary>
@@ -47,22 +47,32 @@ public class ShowNumberUI : MonoBehaviour
     /// <returns></returns>
     private IEnumerator ChangeValue()
     {
-        if (newValue == previousValue) yield break;
-        var positive = newValue > previousValue;
-        var difference = positive ? newValue - previousValue : previousValue - newValue;
+        var currentNewValue = newValue;
+        if (currentNewValue == previousValue) yield break;
+        var positive = currentNewValue > previousValue;
+        var difference = positive ? currentNewValue - previousValue : previousValue - currentNewValue;
 
-        var timePerNumber = timeToChangeValue / difference;
+        var timePerNumber = Mathf.Min(timeToChangeValue / difference, minimumTimePerNumber);
         var transitionNumber = previousValue;
-        while (newValue != transitionNumber)
+        var lastLoop = Time.time;
+        var changes = 0;
+        while (currentNewValue != transitionNumber)
         {
-            transitionNumber += positive ? 1 : -1;
-            UpdateValueUI(transitionNumber);
             var currentTime = Time.time;
+            var timePassed = currentTime - lastLoop;
+            lastLoop = currentTime;
+            var changesQuantity = Mathf.FloorToInt(timePassed / timePerNumber);
+            changes += changesQuantity;
+            
+            if (changes > difference) transitionNumber = currentNewValue;
+            else transitionNumber += positive ? changesQuantity : -changesQuantity;
+            UpdateValueUI(transitionNumber);
+            
             while (Time.time < currentTime + timePerNumber)
                 yield return null;
         }
 
-        previousValue = newValue;
+        previousValue = currentNewValue;
         UpdateValueUI(previousValue);
     }
 
@@ -73,5 +83,10 @@ public class ShowNumberUI : MonoBehaviour
     private void UpdateValueUI(int value)
     {
         valueText.text = value.ToString(CultureInfo.InvariantCulture);
+    }
+
+    private void Awake()
+    {
+        coroutineQueue = new CoroutineQueue(this, 5);
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameController: MonoBehaviour
@@ -23,8 +24,6 @@ public class GameController: MonoBehaviour
 
     private void Awake()
     {
-        scoreUI.UpdateValue(score);
-        levelScoreUI.UpdateValue(levelScore);
         enemySpawner.OnPointsScored += PointsScored;
 
         playerSpawner.OnAllShipsDestroyed += GameOver;
@@ -32,6 +31,12 @@ public class GameController: MonoBehaviour
 
         levelManager.LevelTransition += LevelTransition;
         levelManager.NextLevel += NewLevel;
+    }
+
+    private void Start()
+    {
+        scoreUI.UpdateValue(score);
+        levelScoreUI.UpdateValue(levelScore);
     }
 
     /// <summary>

@@ -570,7 +570,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   valueText: {fileID: 225518550}
-  timeToChangeValue: 1
+  timeToChangeValue: 2
+  minimumTimePerNumber: 0.1
 --- !u!114 &312240770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -909,7 +910,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   valueText: {fileID: 1886663164}
-  timeToChangeValue: 1
+  timeToChangeValue: 2
+  minimumTimePerNumber: 0.1
 --- !u!114 &773250012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1502,7 +1504,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tickDuration: 2
-  _dificultyLevel: 1
   _enemies:
   - enemy: {fileID: 6017480202447470230, guid: 24f93034992eaea3c80032d6d36b1ed4, type: 3}
     points: 10
@@ -2197,7 +2198,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   valueText: {fileID: 1320602082}
-  timeToChangeValue: 1
+  timeToChangeValue: 2
+  minimumTimePerNumber: 0.1
 --- !u!114 &1875496340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2480,8 +2482,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 655788453
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: fe1e9d4d6e0f516429aafd76b2b2cb28, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2539,7 +2541,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   valueText: {fileID: 937924935}
-  timeToChangeValue: 1
+  timeToChangeValue: 2
+  minimumTimePerNumber: 0.1
 --- !u!224 &1988914826
 RectTransform:
   m_ObjectHideFlags: 0

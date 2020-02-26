@@ -34,7 +34,7 @@ public class LevelManager : MonoBehaviour
         transitioning = false;
     }
 
-    private void Awake()
+    private void Start()
     {
         levelUI.UpdateValue(currentLevel);
     }
