@@ -22,9 +22,11 @@ public class LevelManager : MonoBehaviour
     [SerializeField] [Tooltip("Wait time between level transitions")]
     private float levelTransitionTime;
 
+    public float LevelTransitionTime => levelTransitionTime;
+    
     private float currentLevelDuration;
     private bool transitioning;
-
+    
     /// <summary>
     /// <para>Resets the timer of the current level</para>
     /// </summary>

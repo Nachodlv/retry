@@ -77,7 +77,7 @@ public class PlayerRecorder: Controller
         base.Awake();
         stats = GetComponent<Stats>();
         stats.OnDie += RecordDead;
-        records = new Record[(int) (levelManager.LevelDuration / timeBetweenRecords)];
+        records = new Record[(int) ((levelManager.LevelDuration + levelManager.LevelTransitionTime) / timeBetweenRecords)];
         lastRecord = timeBetweenRecords;
         controllable.OnShoot += RecordShoot;
     }

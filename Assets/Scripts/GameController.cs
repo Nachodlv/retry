@@ -18,6 +18,9 @@ public class GameController: MonoBehaviour
 
     [SerializeField] [Tooltip("Manager of checkpoints")]
     private LevelManager levelManager;
+
+    [SerializeField] [Tooltip("New Level text animator")]
+    private NewLevelAnimator newLevelAnimator;
     
     private int score;
     private int levelScore;
@@ -99,10 +102,12 @@ public class GameController: MonoBehaviour
 
     /// <summary>
     /// <para>Stops the EnemySpawner from spawning enemies</para>
+    /// <para>Pops up the new level text</para>
     /// <remarks>This method is called when the level time is over</remarks>
     /// </summary>
     private void LevelTransition()
     {
         enemySpawner.StopSpawning();
+        newLevelAnimator.PopUp();
     }
 }

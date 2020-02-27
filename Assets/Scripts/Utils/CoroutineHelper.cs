@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace Utils
 {
+    /// <summary>
+    /// <para>Delegate used to store Coroutine methods</para>
+    /// </summary>
+    public delegate IEnumerator CoroutineDelegate();
     public static class CoroutineHelper
     {
         /// <summary>
