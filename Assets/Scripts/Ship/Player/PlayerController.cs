@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// <para>Fire events whenever the touch controller is moved</para>
 /// </summary>
-[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(SpriteRenderer), typeof(KeyboardController))]
 public class PlayerController : Controller
 {
     [SerializeField][Tooltip("Circle that represents that the user is controlling the ship")] 
@@ -14,6 +14,7 @@ public class PlayerController : Controller
     
     private SimpleTouchController touchController;
     private SpriteRenderer spriteRenderer;
+    private KeyboardController keyboardController;
     private bool enable;
 
     public bool Enable
@@ -31,11 +32,13 @@ public class PlayerController : Controller
     {
         base.Awake();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        keyboardController = GetComponent<KeyboardController>();
     }
 
     private void Start()
     {
         touchController.TouchEvent += Move;
+        keyboardController.OnMove += Move;
         touchController.TouchStateEvent += TouchControllerState;
     }
 
